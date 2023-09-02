@@ -18,12 +18,14 @@
  */
 package org.apache.pinot.queries;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.pinot.common.response.broker.BrokerResponseNative;
 import org.apache.pinot.common.response.broker.ResultTable;
 import org.apache.pinot.core.operator.ExecutionStatistics;
@@ -132,10 +134,13 @@ public class QueriesTestUtils {
 
   private static void validateRows(List<Object[]> actual, List<Object[]> expected) {
     assertEquals(actual.size(), expected.size());
+    List<Object> expectedRows = new ArrayList<>();
+    List<Object> actualRows = new ArrayList<>();
     for (int i = 0; i < actual.size(); i++) {
-      // Generic assertEquals delegates to assertArrayEquals, which can test for equality of array values in rows.
-      assertEquals((Object) actual.get(i), (Object) expected.get(i));
+      expectedRows.add(expected.get(i));
+      actualRows.add(actual.get(i));
     }
+    CollectionUtils.isEqualCollection(expectedRows, actualRows);
   }
 
   public static void testInterSegmentsResult(BrokerResponseNative brokerResponse, long expectedNumDocsScanned,
