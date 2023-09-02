@@ -712,7 +712,7 @@ public class ExplainPlanQueriesTest extends BaseQueriesTest {
         "PLAN_START(numSegmentsForThisPlan:4)", ExplainPlanRows.PLAN_START_IDS, ExplainPlanRows.PLAN_START_IDS
     });
     result1.add(new Object[]{"SELECT(selectList:noIndexCol1, noIndexCol2, sortedIndexCol1)", 3, 2});
-    result1.add(new Object[]{"PROJECT(sortedIndexCol1, noIndexCol2, noIndexCol1)", 4, 3});
+    result1.add(new Object[]{"PROJECT(noIndexCol1, noIndexCol2, sortedIndexCol1)", 4, 3});
     result1.add(new Object[]{"DOC_ID_SET", 5, 4});
     result1.add(new Object[]{"FILTER_MATCH_ENTIRE_SEGMENT(docs:3)", 6, 5});
     check(query1, new ResultTable(DATA_SCHEMA, result1));
@@ -728,7 +728,7 @@ public class ExplainPlanQueriesTest extends BaseQueriesTest {
         "PLAN_START(numSegmentsForThisPlan:4)", ExplainPlanRows.PLAN_START_IDS, ExplainPlanRows.PLAN_START_IDS
     });
     result2.add(new Object[]{"SELECT(selectList:noIndexCol1, noIndexCol2)", 3, 2});
-    result2.add(new Object[]{"PROJECT(noIndexCol2, noIndexCol1)", 4, 3});
+    result2.add(new Object[]{"PROJECT(noIndexCol1, noIndexCol2)", 4, 3});
     result2.add(new Object[]{"DOC_ID_SET", 5, 4});
     result2.add(new Object[]{"FILTER_AND", 6, 5});
     result2.add(new Object[]{
